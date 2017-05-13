@@ -5,29 +5,19 @@ defmodule CordcutterApi.MovieController do
 
   def search(conn, %{"search_string" => search_string} = params) do
     Movie.search_url(search_string)
-    |> HTTPoison.get
+    |> Movie.search
     |> case do
-        {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-          Poison.decode(body)
-          |> case do
-              {:ok, body} -> json conn, body["results"]
-            end
-        {:error, %HTTPoison.Error{reason: reason}} ->
-          json conn, %{error: reason}
-      end
+        {:ok, results} ->  json conn, results
+        {:error, reason} -> json conn, reason
+       end
   end
 
   def detail(conn, %{"id" => id} = params) do
     Movie.movie_url(id)
-    |> HTTPoison.get
+    |> Movie.get_detail
     |> case do
-        {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-          Poison.decode(body)
-          |> case do
-              {:ok, body} -> json conn, body
-            end
-        {:error, %HTTPoison.Error{reason: reason}} ->
-          json conn, %{error: reason}
+        {:ok, results} -> json conn, results 
+        {:error, reason} -> json conn, reason
       end
   end
 end
