@@ -16,14 +16,11 @@ defmodule CordcutterApi.Router do
   scope "/api", CordcutterApi do
     pipe_through :api
 
-    get "/movie/", MovieController, :search
-    get "/movie/:id", MovieController, :detail
-    get "/show/", ShowController, :search
-    get "/show/:id", ShowController, :detail
-  end
+    get "/movies/", MovieController, :search
+    get "/movies/:id", MovieController, :detail
 
-  # Other scopes may use custom stacks.
-  # scope "/api", CordcutterApi do
-  #   pipe_through :api
-  # end
+    get "/shows/", ShowsController, :search
+    get "/shows/:id", ShowController, :detail
+    get "/shows/:id/season/:season_id", ShowController, :season
+  end
 end

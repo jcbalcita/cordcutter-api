@@ -4,20 +4,18 @@ defmodule CordcutterApi.MovieController do
   alias CordcutterApi.Movie
 
   def search(conn, %{"search_string" => search_string} = params) do
-    Movie.search_url(search_string)
-    |> Movie.search
+    Movie.search(search_string)
     |> case do
         {:ok, results} ->  json conn, results
         {:error, reason} -> json conn, reason
-       end
+    end
   end
 
   def detail(conn, %{"id" => id} = params) do
-    Movie.movie_url(id)
-    |> Movie.get_detail
+    Movie.get_detail(id)
     |> case do
-        {:ok, results} -> json conn, results 
+        {:ok, results} -> json conn, results
         {:error, reason} -> json conn, reason
-      end
+    end
   end
 end
