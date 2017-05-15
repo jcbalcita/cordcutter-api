@@ -17,7 +17,6 @@ defmodule CordcutterApi.ShowController do
   end
 
   def season(conn, %{"id" => id, "season_id" => season_id} = params) do
-    IO.inspect(params)
     season_detail = Show.get_season_detail(id, season_id)
     json conn, season_detail
   end

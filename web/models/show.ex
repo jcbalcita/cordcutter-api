@@ -24,6 +24,13 @@ defmodule CordcutterApi.Show do
      end
   end
 
+  def get_detail(id) do
+    %Show{id: id}
+    |> get_display
+    |> get_content
+    |> get_seasons
+  end
+
   def get_display(show) do
     Url.show(show.id)
     |> HTTPoison.get
@@ -75,19 +82,11 @@ defmodule CordcutterApi.Show do
      end
   end
 
-  def get_detail(id) do
-    %Show{id: id}
-    |> get_display
-    |> get_content
-    |> get_seasons
-  end
-
   def get_season_detail(id, season_id) do
     Url.season_detail(id, season_id)
     |> HTTPoison.get
     |> case do
         {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-          IO.inspect("PRETTY FAR")
           case Poison.decode(body) do
             {:ok, body} -> body["results"]
           end
