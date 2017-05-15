@@ -19,7 +19,7 @@ defmodule CordcutterApi.Router do
     get "/movies/", MovieController, :search
     get "/movies/:id", MovieController, :detail
 
-    get "/shows/", ShowsController, :search
+    get "/shows/", ShowController, :search
     get "/shows/:id", ShowController, :detail
     get "/shows/:id/season/:season_id", ShowController, :season
   end
