@@ -4,7 +4,7 @@ defmodule CordcutterApi.Mixfile do
   def project do
     [app: :cordcutter_api,
      version: "0.0.1",
-     elixir: "~> 1.2",
+     elixir: "~> 1.4444",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -19,7 +19,7 @@ defmodule CordcutterApi.Mixfile do
   def application do
     [mod: {CordcutterApi, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :httpoison, :exrm]]
+                    :phoenix_ecto, :postgrex, :httpoison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,7 +39,7 @@ defmodule CordcutterApi.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:httpoison, "~> 0.11.1"},
-     {:exrm, "~> 0.14.2"}]
+     {:distillery, "~> 1.4"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
