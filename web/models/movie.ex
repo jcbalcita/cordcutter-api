@@ -25,7 +25,7 @@ defmodule CordcutterApi.Movie do
         Poison.decode(body)
         |> case do
             {:ok, body} -> {:ok, body}
-           end
+        end
       {:error, %HTTPoison.Error{reason: reason}} ->
         {:error, reason}
     end
