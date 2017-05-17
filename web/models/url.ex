@@ -3,8 +3,8 @@ defmodule CordcutterApi.Url do
 
   alias CordcutterApi.Endpoint
   @base_url Application.get_env(:cordcutter_api, Endpoint)[:base_url]
-  @movie_query Application.get_env(:cordcutter_api, Endpoint)[:movie_query]
-  @show_query Application.get_env(:cordcutter_api, Endpoint)[:show_query]
+  @movie_query "/search?type=movie&field=title&query="
+  @show_query "/search?type=show&field=title&query="
   @api_key Application.get_env(:cordcutter_api, Endpoint)[:api_key]
 
   def search_movie(search_string) do

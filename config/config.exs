@@ -17,9 +17,7 @@ config :cordcutter_api, CordcutterApi.Endpoint,
   pubsub: [name: CordcutterApi.PubSub,
            adapter: Phoenix.PubSub.PG2],
   api_key: System.get_env("API_KEY"),
-  base_url: System.get_env("BASE_URL"),
-  movie_query: System.get_env("MOVIE_QUERY"),
-  show_query: System.get_env("SHOW_QUERY")
+  base_url: System.get_env("BASE_URL")
 
 # Configures Elixir's Logger
 config :logger, :console,
