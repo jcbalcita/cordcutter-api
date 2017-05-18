@@ -6,6 +6,6 @@ defmodule CordcutterApi.Requester do
     end
   end
 
-defp decode(body): Poison.decode(body)
+defp decode(body), do: Poison.decode(body)
 
 end
