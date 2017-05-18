@@ -8,12 +8,3 @@ config :cordcutter_api, CordcutterApi.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
-
-# Configure your database
-config :cordcutter_api, CordcutterApi.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "cordcutter_api_test",
-  hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox

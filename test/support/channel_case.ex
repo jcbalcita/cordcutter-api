@@ -20,11 +20,6 @@ defmodule CordcutterApi.ChannelCase do
       # Import conveniences for testing with channels
       use Phoenix.ChannelTest
 
-      alias CordcutterApi.Repo
-      import Ecto
-      import Ecto.Changeset
-      import Ecto.Query
-
 
       # The default endpoint for testing
       @endpoint CordcutterApi.Endpoint
@@ -32,11 +27,6 @@ defmodule CordcutterApi.ChannelCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(CordcutterApi.Repo)
-
-    unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(CordcutterApi.Repo, {:shared, self()})
-    end
 
     :ok
   end

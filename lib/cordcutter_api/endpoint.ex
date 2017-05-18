@@ -36,7 +36,7 @@ defmodule CordcutterApi.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_cordcutter_api_key",
-    signing_salt: "scOSCjUc"
+    signing_salt: "AKR1t+Rp"
 
   plug CordcutterApi.Router
 end

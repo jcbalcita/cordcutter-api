@@ -18,21 +18,13 @@ defmodule CordcutterApi.Web do
 
   def model do
     quote do
-      use Ecto.Schema
-
-      import Ecto
-      import Ecto.Changeset
-      import Ecto.Query
+      # Define common model functionality
     end
   end
 
   def controller do
     quote do
       use Phoenix.Controller
-
-      alias CordcutterApi.Repo
-      import Ecto
-      import Ecto.Query
 
       import CordcutterApi.Router.Helpers
       import CordcutterApi.Gettext
@@ -64,10 +56,6 @@ defmodule CordcutterApi.Web do
   def channel do
     quote do
       use Phoenix.Channel
-
-      alias CordcutterApi.Repo
-      import Ecto
-      import Ecto.Query
       import CordcutterApi.Gettext
     end
   end

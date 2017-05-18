@@ -5,19 +5,13 @@
 # is restricted to this project.
 use Mix.Config
 
-# General application configuration
-config :cordcutter_api,
-  ecto_repos: [CordcutterApi.Repo]
-
 # Configures the endpoint
 config :cordcutter_api, CordcutterApi.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "MDbrNCy+Wi8v/0p3jhuUvPBiGqrQHC/UoD4vvZ2IoveCjLpb5qT/lE3q7yUETnGX",
+  secret_key_base: "WteiLwVeJUXsFSnVlXCbGjMTr95tGWNgKL+8m1KNTOEI/Ar84J4Ualnk7Im2g433",
   render_errors: [view: CordcutterApi.ErrorView, accepts: ~w(html json)],
   pubsub: [name: CordcutterApi.PubSub,
-           adapter: Phoenix.PubSub.PG2],
-  api_key: System.get_env("API_KEY"),
-  base_url: System.get_env("BASE_URL")
+           adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
