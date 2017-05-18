@@ -10,7 +10,9 @@ Not really for public consumption as the responses to the API calls are narrowly
 scope "/api", CordcutterApi do
   pipe_through :api
 
-  get "/movies/", MovieController, :search
+  # use param `search_string` for searches
+
+  get "/movies/", MovieController, :search 
   get "/movies/:id", MovieController, :detail
 
   get "/shows/", ShowController, :search
