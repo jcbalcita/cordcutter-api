@@ -38,5 +38,7 @@ defmodule CordcutterApi.Endpoint do
     key: "_cordcutter_api_key",
     signing_salt: "AKR1t+Rp"
 
+  plug CORSPlug
+
   plug CordcutterApi.Router
 end
