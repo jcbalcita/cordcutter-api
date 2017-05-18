@@ -43,6 +43,6 @@ config :cordcutter_api, CordcutterApi.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "cordcutter_api_dev",
+  database: "cordcutter_api_prod",
   hostname: "localhost",
   pool_size: 10
