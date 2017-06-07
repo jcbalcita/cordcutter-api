@@ -7,7 +7,7 @@ defmodule CordcutterApi.Show do
 
   defstruct [id: nil, display: nil, content: nil, seasons: nil]
 
-  defmodule Display do
+  defmodule ShowDisplay do
     defstruct [:title, :artwork, :first_aired, :overview]
   end
 
@@ -26,7 +26,15 @@ defmodule CordcutterApi.Show do
     |> get_seasons
   end
 
-  def get_display(show) do
+  def get_season_detail(id, season_id) do
+    Url.season_detail(id, season_id)
+    |> Requester.get
+    |> case do
+        {:ok, body} -> body["results"]
+    end
+  end
+
+  defp get_display(show) do
     Url.show(show.id)
     |> Requester.get
     |> case do
@@ -37,7 +45,7 @@ defmodule CordcutterApi.Show do
             "first_aired" => first_aired,
             "overview" => overview
            } = body
-          %Show{show | display: %Display{
+          %Show{show | display: %ShowDisplay{
             title: title,
             artwork: artwork,
             first_aired: first_aired,
@@ -46,7 +54,7 @@ defmodule CordcutterApi.Show do
     end
   end
 
-  def get_content(show) do
+  defp get_content(show) do
     Url.show_content(show.id)
     |> Requester.get
     |> case do
@@ -56,7 +64,7 @@ defmodule CordcutterApi.Show do
     end
   end
 
-  def get_seasons(show) do
+  defp get_seasons(show) do
     Url.seasons(show.id)
     |> Requester.get
     |> case do
@@ -66,13 +74,5 @@ defmodule CordcutterApi.Show do
             |> Enum.map(fn s -> s["season_number"] end)
           %Show{show | seasons: seasons}
      end
-  end
-
-  def get_season_detail(id, season_id) do
-    Url.season_detail(id, season_id)
-    |> Requester.get
-    |> case do
-        {:ok, body} -> body["results"]
-    end
   end
 end

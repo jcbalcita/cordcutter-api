@@ -12,10 +12,6 @@ defmodule CordcutterApi.MovieController do
   end
 
   def detail(conn, %{"id" => id} = params) do
-    Movie.get_detail(id)
-    |> case do
-        {:ok, results} -> json conn, results
-        {:error, reason} -> json conn, reason
-    end
+    json conn, Movie.get_detail(id)
   end
 end
