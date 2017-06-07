@@ -11,6 +11,8 @@ config :cordcutter_api, CordcutterApi.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
+  api_key: System.get_env("API_KEY"),
+  base_url: System.get_env("BASE_URL"),
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
                     cd: Path.expand("../", __DIR__)]]
 
