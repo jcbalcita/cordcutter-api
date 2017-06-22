@@ -14,7 +14,6 @@ use Mix.Config
 config :cordcutter_api, CordcutterApi.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/manifest.json",
   api_key: System.get_env("API_KEY"),
   base_url: System.get_env("BASE_URL")
 
