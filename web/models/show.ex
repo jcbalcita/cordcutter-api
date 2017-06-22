@@ -11,6 +11,7 @@ defmodule CordcutterApi.Show do
     defstruct [:title, :artwork, :first_aired, :overview]
   end
 
+  # TODO: handle errors
   def search(search_string) do
     Url.search_show(search_string)
     |> Requester.get
@@ -26,6 +27,7 @@ defmodule CordcutterApi.Show do
     |> get_seasons
   end
 
+  # TODO: handle errors
   def get_season_detail(id, season_id) do
     Url.season_detail(id, season_id)
     |> Requester.get
@@ -34,6 +36,7 @@ defmodule CordcutterApi.Show do
     end
   end
 
+  # TODO: handle errors
   defp get_display(show) do
     Url.show(show.id)
     |> Requester.get
@@ -54,6 +57,7 @@ defmodule CordcutterApi.Show do
     end
   end
 
+  # TODO: handle errors
   defp get_content(show) do
     Url.show_content(show.id)
     |> Requester.get
@@ -64,6 +68,7 @@ defmodule CordcutterApi.Show do
     end
   end
 
+  # TODO: handle errors
   defp get_seasons(show) do
     Url.seasons(show.id)
     |> Requester.get

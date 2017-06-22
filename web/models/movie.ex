@@ -7,6 +7,10 @@ defmodule CordcutterApi.Movie do
 
   defstruct [id: nil, display: nil, sources: nil]
 
+  defmodule MovieDisplay do
+    defstruct [poster: nil, title: nil, release_year: nil, overview: nil]
+  end
+
   defmodule MovieSources do
     defstruct [
       free: nil,
@@ -16,10 +20,7 @@ defmodule CordcutterApi.Movie do
     ]
   end
 
-  defmodule MovieDisplay do
-    defstruct [poster: nil, title: nil, release_year: nil, overview: nil]
-  end
-
+  # TODO: handle errors
   def search(search_string) do
     IO.inspect(Url.search_movie(search_string))
     Url.search_movie(search_string)
@@ -29,12 +30,19 @@ defmodule CordcutterApi.Movie do
     end
   end
 
+  # TODO: handle errors
   def get_detail(id) do
     Url.movie(id)
     |> Requester.get
     |> case do
       {:ok, body} -> parse_results(id, body)
     end
+  end
+
+  defp parse_results(id, body) do
+    %Movie{id: id}
+    |> parse_display(body)
+    |> parse_sources(body)
   end
 
   defp parse_display(movie, body) do
@@ -65,12 +73,6 @@ defmodule CordcutterApi.Movie do
       tv_everywhere: tv_everywhere,
       purchase: purchase
     }}
-  end
-
-  defp parse_results(id, body) do
-    %Movie{id: id}
-    |> parse_display(body)
-    |> parse_sources(body)
   end
 
 end
