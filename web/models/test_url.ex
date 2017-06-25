@@ -4,4 +4,8 @@ defmodule CordcutterApi.StubUrl do
   def search_movie(search_string) do
     search_string
   end
+
+  def movie(id) do
+    Integer.to_string(id)
+  end
 end
