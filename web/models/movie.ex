@@ -2,8 +2,9 @@ defmodule CordcutterApi.Movie do
   use CordcutterApi.Web, :model
 
   alias CordcutterApi.Movie
-  alias CordcutterApi.Url
-  alias CordcutterApi.Requester
+
+  @url CordcutterApi.Url
+  @requester CordcutterApi.Requester
 
   defstruct [id: nil, display: nil, sources: nil]
 
@@ -20,32 +21,33 @@ defmodule CordcutterApi.Movie do
     ]
   end
 
-  # TODO: handle errors
-  def search(search_string) do
-    IO.inspect(Url.search_movie(search_string))
-    Url.search_movie(search_string)
-    |> Requester.get
+  @spec search(string, module, module) :: tuple
+  def   search(search_string, url \\ @url, requester \\ @requester) do
+    url.search_movie(search_string)
+    |> requester.get
     |> case do
         {:ok, body} -> {:ok, body["results"]}
     end
   end
 
-  # TODO: handle errors
-  def get_detail(id) do
-    Url.movie(id)
-    |> Requester.get
+  @spec get_detail(integer, module, module) :: struct
+  def   get_detail(id, url \\ @url, requester \\ @requester) do
+    url.movie(id)
+    |> requester.get
     |> case do
       {:ok, body} -> parse_results(id, body)
     end
   end
 
-  defp parse_results(id, body) do
+  @spec parse_results(integer, string) :: struct
+  defp  parse_results(id, body) do
     %Movie{id: id}
     |> parse_display(body)
     |> parse_sources(body)
   end
 
-  defp parse_display(movie, body) do
+  @spec parse_display(struct, string) :: struct
+  defp  parse_display(movie, body) do
     %{
       "poster_240x342" => poster,
       "title" => title,
@@ -60,7 +62,8 @@ defmodule CordcutterApi.Movie do
     }}
   end
 
-  defp parse_sources(movie, body) do
+  @spec parse_sources(struct, string) :: struct
+  defp  parse_sources(movie, body) do
     %{
       "free_web_sources" => free,
       "subscription_web_sources" => subscription,
@@ -74,5 +77,4 @@ defmodule CordcutterApi.Movie do
       purchase: purchase
     }}
   end
-
 end
