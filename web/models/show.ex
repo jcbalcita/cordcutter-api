@@ -2,8 +2,9 @@ defmodule CordcutterApi.Show do
   use CordcutterApi.Web, :model
 
   alias CordcutterApi.Show
-  alias CordcutterApi.Url
-  alias CordcutterApi.Requester
+
+  @url CordcutterApi.Url
+  @requester CordcutterApi.Requester
 
   defstruct [id: nil, display: nil, content: nil, seasons: nil]
 
@@ -11,32 +12,36 @@ defmodule CordcutterApi.Show do
     defstruct [:title, :artwork, :first_aired, :overview]
   end
 
-  def search(search_string) do
-    Url.search_show(search_string)
-    |> Requester.get
+  @spec search(string, module, module) :: tuple
+  def   search(search_string, url \\ @url, requester \\ @requester) do
+    url.search_show(search_string)
+    |> requester.get
     |> case do
         {:ok, body} -> {:ok, body["results"]}
     end
   end
 
-  def get_detail(id) do
+  @spec get_detail(integer) :: struct
+  def   get_detail(id) do
     %Show{id: id}
     |> get_display
     |> get_content
     |> get_seasons
   end
 
-  def get_season_detail(id, season_id) do
-    Url.season_detail(id, season_id)
-    |> Requester.get
+  @spec get_season_detail(integer, integer, module, module) :: struct
+  def   get_season_detail(id, season_id, url \\ @url, requester \\ @requester) do
+    url.season_detail(id, season_id)
+    |> requester.get
     |> case do
         {:ok, body} -> body["results"]
     end
   end
 
-  defp get_display(show) do
-    Url.show(show.id)
-    |> Requester.get
+  @spec get_display(struct, module, module) :: struct
+  defp  get_display(show, url \\ @url, requester \\ @requester) do
+    url.show(show.id)
+    |> requester.get
     |> case do
         {:ok, body} ->
           %{
@@ -54,9 +59,10 @@ defmodule CordcutterApi.Show do
     end
   end
 
-  defp get_content(show) do
-    Url.show_content(show.id)
-    |> Requester.get
+  @spec get_content(struct, module, module) :: struct
+  defp  get_content(show, url \\ @url, requester \\ @requester) do
+    url.show_content(show.id)
+    |> requester.get
     |> case do
         {:ok, body} ->
           web_sources = body["results"]["web"]["episodes"]["all_sources"]
@@ -64,9 +70,10 @@ defmodule CordcutterApi.Show do
     end
   end
 
-  defp get_seasons(show) do
-    Url.seasons(show.id)
-    |> Requester.get
+  @spec get_seasons(struct, module, module) :: struct
+  defp  get_seasons(show, url \\ @url, requester \\ @request) do
+    url.seasons(show.id)
+    |> requester.get
     |> case do
         {:ok, body} ->
           seasons =
