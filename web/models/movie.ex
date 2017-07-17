@@ -22,7 +22,7 @@ defmodule CordcutterApi.Movie do
   end
 
   @spec search(string, module, module) :: tuple
-  def   search(search_string, url \\ @url, requester \\ @requester) do
+  def search(search_string, url \\ @url, requester \\ @requester) do
     url.search_movie(search_string)
     |> requester.get
     |> case do
@@ -31,7 +31,7 @@ defmodule CordcutterApi.Movie do
   end
 
   @spec get_detail(integer, module, module) :: struct
-  def   get_detail(id, url \\ @url, requester \\ @requester) do
+  def get_detail(id, url \\ @url, requester \\ @requester) do
     url.movie(id)
     |> requester.get
     |> case do
@@ -40,14 +40,14 @@ defmodule CordcutterApi.Movie do
   end
 
   @spec parse_results(integer, string) :: struct
-  defp  parse_results(id, body) do
+  defp parse_results(id, body) do
     %Movie{id: id}
     |> parse_display(body)
     |> parse_sources(body)
   end
 
   @spec parse_display(struct, string) :: struct
-  defp  parse_display(movie, body) do
+  defp parse_display(movie, body) do
     %{
       "poster_240x342" => poster,
       "title" => title,
@@ -63,7 +63,7 @@ defmodule CordcutterApi.Movie do
   end
 
   @spec parse_sources(struct, string) :: struct
-  defp  parse_sources(movie, body) do
+  defp parse_sources(movie, body) do
     %{
       "free_web_sources" => free,
       "subscription_web_sources" => subscription,
