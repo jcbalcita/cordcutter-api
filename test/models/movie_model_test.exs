@@ -6,8 +6,10 @@ defmodule CordcutterApi.MovieModelTest do
   test "Movie.search/3 passes search string to depedencies" do
     #given
     passed_string = "boofar"
+
     #when
     actual = Movie.search(passed_string, CordcutterApi.StubUrl, CordcutterApi.StubRequester)
+
     #then
     assert actual == {:ok, passed_string}
   end
@@ -22,8 +24,10 @@ defmodule CordcutterApi.MovieModelTest do
     subscription_web_sources = 2
     tv_everywhere_web_sources = 3
     purchase_web_sources = 4
+
     #when
     actual = Movie.get_detail(6969, CordcutterApi.StubUrl, CordcutterApi.FakeRequester)
+
     #then
     assert actual.id == 6969
     assert actual.display.poster == poster_240x342
