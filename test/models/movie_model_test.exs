@@ -3,7 +3,7 @@ defmodule CordcutterApi.MovieModelTest do
 
   alias CordcutterApi.Movie
 
-  test "Movie.search/3 passes search string to depedencies" do
+  test "Movie.search/3 passes search string to dependencies" do
     #given
     passed_string = "boofar"
 
