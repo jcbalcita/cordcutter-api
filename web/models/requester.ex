@@ -1,5 +1,4 @@
 defmodule CordcutterApi.Requester do
-
   def get(url) do
     case HTTPoison.get(url) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} -> decode(body)
@@ -7,5 +6,4 @@ defmodule CordcutterApi.Requester do
   end
 
   defp decode(body), do: Poison.decode(body)
-
 end

@@ -13,37 +13,26 @@ defmodule CordcutterApi.Movie do
   end
 
   defmodule MovieSources do
-    defstruct [
-      free: nil,
-      tv_everywhere: nil,
-      subscription: nil,
-      purchase: nil
-    ]
+    defstruct [free: nil, tv_everywhere: nil, subscription: nil, purchase: nil]
   end
 
   @spec search(string, module, module) :: tuple
   def search(search_string, url \\ @url, requester \\ @requester) do
-    url.search_movie(search_string)
-    |> requester.get
-    |> case do
-        {:ok, body} -> {:ok, body["results"]}
+    search_string |> url.search_movie |> requester.get |> case do
+      {:ok, body} -> {:ok, body["results"]}
     end
   end
 
   @spec get_detail(integer, module, module) :: struct
   def get_detail(id, url \\ @url, requester \\ @requester) do
-    url.movie(id)
-    |> requester.get
-    |> case do
+    id |> url.movie |> requester.get |> case do
       {:ok, body} -> parse_results(id, body)
     end
   end
 
   @spec parse_results(integer, string) :: struct
   defp parse_results(id, body) do
-    %Movie{id: id}
-    |> parse_display(body)
-    |> parse_sources(body)
+    %Movie{id: id} |> parse_display(body) |> parse_sources(body)
   end
 
   @spec parse_display(struct, string) :: struct
