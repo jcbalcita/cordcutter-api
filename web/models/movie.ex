@@ -18,7 +18,7 @@ defmodule CordcutterApi.Movie do
 
   @spec search(string, module, module) :: tuple
   def search(search_string, url \\ @url, requester \\ @requester) do
-    search_string |> url.search_movie |> requester.get |> case do
+    search_string |> url.movie_search |> requester.get |> case do
       {:ok, body} -> {:ok, body["results"]}
     end
   end

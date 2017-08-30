@@ -4,31 +4,31 @@ defmodule CordcutterApi.Url do
   @movie_query "/search?type=movie&field=title&query="
   @show_query "/search?type=show&field=title&query="
 
-  def search_movie(search_string) do
-    URI.encode("#{@base_url}#{@movie_query}#{search_string}&#{@api_key}")
+  def movie_search(search_string) do
+    URI.encode "#{@base_url}#{@movie_query}#{search_string}&#{@api_key}"
   end
 
   def movie(id) do
-    URI.encode("#{@base_url}/movies/#{id}?#{@api_key}")
+    URI.encode "#{@base_url}/movies/#{id}?#{@api_key}"
   end
 
-  def search_show(search_string) do
-    URI.encode("#{@base_url}#{@show_query}#{search_string}&#{@api_key}")
+  def show_search(search_string) do
+    URI.encode "#{@base_url}#{@show_query}#{search_string}&#{@api_key}"
   end
 
   def show(id) do
-    URI.encode("#{@base_url}/shows/#{id}?#{@api_key}")
+    URI.encode "#{@base_url}/shows/#{id}?#{@api_key}"
   end
 
   def show_content(id) do
-    URI.encode("#{@base_url}/shows/#{id}/available_content?#{@api_key}")
+    URI.encode "#{@base_url}/shows/#{id}/available_content?#{@api_key}"
   end
 
   def seasons(id) do
-    URI.encode("#{@base_url}/shows/#{id}/seasons?#{@api_key}")
+    URI.encode "#{@base_url}/shows/#{id}/seasons?#{@api_key}"
   end
 
   def season_detail(show_id, season_id) do
-    URI.encode("#{@base_url}/shows/#{show_id}/episodes?season=#{season_id}&#{@api_key}&include_links=true")
+    URI.encode "#{@base_url}/shows/#{show_id}/episodes?season=#{season_id}&#{@api_key}&include_links=true"
   end
 end
