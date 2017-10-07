@@ -4,8 +4,7 @@ defmodule CordcutterApi.ShowController do
   alias CordcutterApi.Show
 
   def search(conn, %{"search_string" => search_string} = params) do
-    Show.search(search_string)
-    |> case do
+    Show.search(search_string) |> case do
         {:ok, results} ->  json conn, results
         {:error, reason} -> json conn, reason
     end
